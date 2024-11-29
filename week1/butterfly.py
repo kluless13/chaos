@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 # Parameters
 sigma = 10.0
@@ -24,26 +25,29 @@ state0 = [1.0, 1.0, 1.0]
 # Solve ODE
 states = odeint(lorenz, state0, t)
 
-# Plotting
-fig = plt.figure(figsize=(12, 6))
-ax = fig.add_subplot(121, projection='3d')
-ax.plot(states[:, 0], states[:, 1], states[:, 2])
-ax.set_title('Lorenz Attractor')
+# Setting up the figure and 3D axis
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(projection='3d')
+
+# Initialize lines for the attractor
+line, = ax.plot([], [], [], lw=0.8)
+
+# Initialize the axis limits
+ax.set_xlim((-30, 30))
+ax.set_ylim((-30, 30))
+ax.set_zlim((0, 50))
+ax.set_title('Lorenz Attractor (Animated)')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
 
-# Sensitivity to initial conditions
-state1 = [1.0001, 1.0, 1.0]  # Slightly different initial condition
-states1 = odeint(lorenz, state1, t)
+# Function to update the plot
+def update(num):
+    line.set_data(states[:num, 0], states[:num, 1])
+    line.set_3d_properties(states[:num, 2])
+    return line,
 
-# Plot the difference over time
-ax2 = fig.add_subplot(122)
-difference = np.sqrt(np.sum((states - states1)**2, axis=1))
-ax2.plot(t, difference)
-ax2.set_title('Divergence Over Time')
-ax2.set_xlabel('Time')
-ax2.set_ylabel('Difference')
+# Animation
+ani = FuncAnimation(fig, update, frames=range(1, len(states), 100), interval=20, blit=True)
 
-plt.tight_layout()
 plt.show()

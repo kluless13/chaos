@@ -1,3 +1,5 @@
+**Day 1-2: The Foundations of Chaos Theory**
+
 ### **1. What is Chaos Theory?**
 
 Chaos theory is the study of systems that appear to behave randomly but are, in fact, deterministic. These systems are governed by rules or equations, yet their outcomes are highly sensitive to initial conditions, making them unpredictable over time.
@@ -63,8 +65,6 @@ While randomness and chaos may appear similar, they are fundamentally different:
 1. **Chaos theory bridges order and disorder**, showing that deterministic systems can behave unpredictably.
 2. It explains why long-term predictions in complex systems (like weather) are impossible despite knowing the governing rules.
 3. Chaos theory has applications across disciplines, from physics to biology and finance, offering a framework to understand systems that are sensitive to small changes.
-
----
 
 ---
 
